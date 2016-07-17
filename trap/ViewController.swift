@@ -17,11 +17,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet var deployButton: UIButton!
     
     var locationManager: CLLocationManager!
+    
     var lat: CLLocationDegrees?
     var lon: CLLocationDegrees?
+    var limit: Int?
+    var trapLocations: [Trap]?
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-    var trapLocations: [Trap]?
+    let defaults = NSUserDefaults.standardUserDefaults()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,13 +43,20 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.startUpdatingLocation()
         
         var timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("check"), userInfo: nil, repeats: true)
+        
     }
     
-    
+    // When Button Is Clicked
     @IBAction func deployButtonDidClick(sender: UIButton) {
         addTrap(lat!, lon: lon!)
     }
     
+    
+    
+    
+    
+    
+    // Function - Displays alert and vibrates phone
     func explode(i: Int) {
         AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
         let alert = UIAlertController(title: "It's A Trap!", message: "you were just trapped", preferredStyle: UIAlertControllerStyle.Alert)
@@ -57,6 +67,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
     }
     
+    
+    
+    
+    
+    // Function - Utility to help add Trap's easily
     func addTrap(lat: CLLocationDegrees, lon: CLLocationDegrees) {
         let newItem = NSEntityDescription.insertNewObjectForEntityForName("Trap", inManagedObjectContext: self.managedObjectContext) as! Trap
         
@@ -64,6 +79,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         newItem.lon = lon
     }
     
+    
+    
+    
+    // Function - Runs every second checking if user is on a trap
     func check() {
         fetchTrap()
         for (index, result) in trapLocations!.enumerate() {
@@ -74,6 +93,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    
+    
+    
+    
+    // Function - Location Manager will update lat and lon variables with users coordinates
+    
     func locationManager(manager: CLLocationManager,   didUpdateLocations locations: [CLLocation]) {
         let locValue:CLLocationCoordinate2D = manager.location!.coordinate
         lat = locValue.latitude
@@ -82,6 +107,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
     }
     
+    
+    
+    
+    
+    
+    // Function - Utility to fetch traps from Core Data
     func fetchTrap() -> [Trap]? {
         do {
             let fetchRequest = NSFetchRequest(entityName: "Trap")
@@ -95,11 +126,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
 
 
