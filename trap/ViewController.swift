@@ -21,7 +21,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     var lon: CLLocationDegrees?
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-    let fetchRequest = NSFetchRequest(entityName: "Trap")
+    var trapLocations: [Trap]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,10 +47,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         addTrap(lat!, lon: lon!)
     }
     
-    func explode() {
+    func explode(i: Int) {
         AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
         let alert = UIAlertController(title: "It's A Trap!", message: "you were just trapped", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "DEPLOY", style: UIAlertActionStyle.Default, handler: nil))
+        
+        // Show alert
         self.presentViewController(alert, animated: true, completion: nil)
 
     }
@@ -63,16 +65,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func check() {
-        do {
-            let fetchResults = try managedObjectContext.executeFetchRequest(fetchRequest) as? [Trap]
-            for result in fetchResults! as [Trap] {
-                if result.lat == lat && result.lon == lon {
-                    explode()
-                }
+        fetchTrap()
+        for (index, result) in trapLocations!.enumerate() {
+            if result.lat == lat && result.lon == lon {
+                managedObjectContext.deleteObject(trapLocations![index])
+                explode(index)
             }
-        } catch let error as NSError {
-            // failure
-            print("Fetch failed: \(error.localizedDescription)")
         }
     }
     
@@ -80,8 +78,21 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         let locValue:CLLocationCoordinate2D = manager.location!.coordinate
         lat = locValue.latitude
         lon = locValue.longitude
-        print("locations = \(locValue.latitude) \(locValue.longitude)")
+        //print("locations = \(locValue.latitude) \(locValue.longitude)")
         
+    }
+    
+    func fetchTrap() -> [Trap]? {
+        do {
+            let fetchRequest = NSFetchRequest(entityName: "Trap")
+            let fetchResults = try managedObjectContext.executeFetchRequest(fetchRequest) as? [Trap]
+            trapLocations = fetchResults!
+            return trapLocations!
+        } catch let error as NSError {
+            // failure
+            print("Fetch failed: \(error.localizedDescription)")
+            return nil
+        }
     }
     
     

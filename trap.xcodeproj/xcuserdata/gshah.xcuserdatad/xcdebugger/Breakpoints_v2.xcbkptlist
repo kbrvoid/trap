@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "trap/ViewController.swift"
-            timestampString = "490407839.218144"
+            timestampString = "490410788.350232"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
             landmarkName = "ViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -48,22 +48,6 @@
             startingLineNumber = "47"
             endingLineNumber = "47"
             landmarkName = "deployButtonDidClick(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "trap/ViewController.swift"
-            timestampString = "490408402.574202"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
-            landmarkName = "check()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
