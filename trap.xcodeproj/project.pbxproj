@@ -15,6 +15,8 @@
 		2853A6DE1D3AC21D000A0E08 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2853A6DC1D3AC21D000A0E08 /* LaunchScreen.storyboard */; };
 		2853A6E91D3AC21D000A0E08 /* trapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2853A6E81D3AC21D000A0E08 /* trapTests.swift */; };
 		2853A6F41D3AC21D000A0E08 /* trapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2853A6F31D3AC21D000A0E08 /* trapUITests.swift */; };
+		2853A7031D3B0090000A0E08 /* Trap+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2853A7011D3B0090000A0E08 /* Trap+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
+		2853A7041D3B0090000A0E08 /* Trap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2853A7021D3B0090000A0E08 /* Trap.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		2853A6EF1D3AC21D000A0E08 /* trapUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = trapUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2853A6F31D3AC21D000A0E08 /* trapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = trapUITests.swift; sourceTree = "<group>"; };
 		2853A6F51D3AC21D000A0E08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2853A7011D3B0090000A0E08 /* Trap+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Trap+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		2853A7021D3B0090000A0E08 /* Trap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trap.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +83,8 @@
 		2853A6C41D3AC21D000A0E08 = {
 			isa = PBXGroup;
 			children = (
+				2853A7011D3B0090000A0E08 /* Trap+CoreDataProperties.swift */,
+				2853A7021D3B0090000A0E08 /* Trap.swift */,
 				2853A6CF1D3AC21D000A0E08 /* trap */,
 				2853A6E71D3AC21D000A0E08 /* trapTests */,
 				2853A6F21D3AC21D000A0E08 /* trapUITests */,
@@ -258,8 +264,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2853A7041D3B0090000A0E08 /* Trap.swift in Sources */,
 				2853A6D31D3AC21D000A0E08 /* ViewController.swift in Sources */,
 				2853A6D91D3AC21D000A0E08 /* trap.xcdatamodeld in Sources */,
+				2853A7031D3B0090000A0E08 /* Trap+CoreDataProperties.swift in Sources */,
 				2853A6D11D3AC21D000A0E08 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

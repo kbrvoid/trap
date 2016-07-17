@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  trap
 //
-//  Created by Gopal Shah on 7/16/16.
+//  Created by Kabir Shah on 7/16/16.
 //  Copyright © 2016 Kabir Shah. All rights reserved.
 //
 
@@ -10,6 +10,7 @@ import UIKit
 import AudioToolbox
 import MapKit
 import CoreLocation
+import CoreData
 
 class ViewController: UIViewController, CLLocationManagerDelegate {
     
@@ -20,6 +21,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     var lon: CLLocationDegrees?
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    let fetchRequest = NSFetchRequest(entityName: "Trap")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,14 +39,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startUpdatingLocation()
         
-        print(managedObjectContext)
-        
-        //var timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("check"), userInfo: nil, repeats: true)
+        var timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("check"), userInfo: nil, repeats: true)
     }
     
     
     @IBAction func deployButtonDidClick(sender: UIButton) {
-        
+        addTrap(lat!, lon: lon!)
     }
     
     func explode() {
@@ -56,12 +56,23 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func addTrap(lat: CLLocationDegrees, lon: CLLocationDegrees) {
+        let newItem = NSEntityDescription.insertNewObjectForEntityForName("Trap", inManagedObjectContext: self.managedObjectContext) as! Trap
         
+        newItem.lat = lat
+        newItem.lon = lon
     }
     
     func check() {
-        if lat == CLLocationDegrees(37.785834) && lon == CLLocationDegrees(-122.406417) {
-            explode()
+        do {
+            let fetchResults = try managedObjectContext.executeFetchRequest(fetchRequest) as? [Trap]
+            for result in fetchResults! as [Trap] {
+                if result.lat == lat && result.lon == lon {
+                    explode()
+                }
+            }
+        } catch let error as NSError {
+            // failure
+            print("Fetch failed: \(error.localizedDescription)")
         }
     }
     
@@ -78,6 +89,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
 
 
 }
