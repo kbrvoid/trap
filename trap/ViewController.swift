@@ -32,7 +32,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         // Button Setup
         deployButton.backgroundColor = UIColor.clearColor()
         deployButton.layer.borderWidth = 1
-        deployButton.layer.borderColor = UIColor.blackColor().CGColor
+        deployButton.layer.borderColor = UIColor.whiteColor().CGColor
         
         // Monitor Location
         self.locationManager = CLLocationManager()
@@ -50,7 +50,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBAction func deployButtonDidClick(sender: UIButton) {
         addTrap(lat!, lon: lon!)
     }
-    
     
     
     
